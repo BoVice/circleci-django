@@ -19,6 +19,7 @@ jobs:
           key: deps9-{{ .Branch }}-{{ checksum "Pipfile.lock" }}
       - run:
           command: |
+            docker images --no-trunc --format '{{.ID}}' | xargs docker rmi
             sudo pip install pipenv
             pipenv install
       - save_cache:
